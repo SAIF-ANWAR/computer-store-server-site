@@ -12,5 +12,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log("server is ok")
+    console.log("server is ok.Port is:", port)
 })
