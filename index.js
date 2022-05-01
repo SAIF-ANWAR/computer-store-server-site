@@ -41,6 +41,33 @@ async function run() {
             const result = await laptopCollection.deleteOne(query)
             res.send(result)
         })
+
+        app.put('/laptops/:id', async (req, res) => {
+            const id = req.params.id
+            const updatedQuantity = req.body
+            const query = { _id: ObjectId(id) }
+            const options = { upsert: true }
+            const newQuantity = {
+                $set: {
+                    quantity: updatedQuantity.quantity
+                }
+            }
+            const result = await laptopCollection.updateOne(query, newQuantity, options)
+            res.send(result)
+        })
+        // app.put('/laptops/:id', async (req, res) => {
+        //     const id = req.params.id
+        //     const updatedQuantity = req.body
+        //     const query = { _id: ObjectId(id) }
+        //     const options = { upsert: true }
+        //     const newQuantity = {
+        //         $set: {
+        //             quantity: updatedQuantity.newResult
+        //         }
+        //     }
+        //     const result = await laptopCollection.updateOne(query, newQuantity, options)
+        //     res.send(result)
+        // })
     }
     finally {
 
