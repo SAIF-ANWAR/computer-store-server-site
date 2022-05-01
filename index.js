@@ -30,6 +30,17 @@ async function run() {
             const cursor = await laptopCollection.findOne(query)
             res.send(cursor)
         })
+        app.post('/laptops', async (req, res) => {
+            const query = req.body
+            const result = await laptopCollection.insertOne(query)
+            res.send(result)
+        })
+        app.delete('/laptops/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: ObjectId(id) }
+            const result = await laptopCollection.deleteOne(query)
+            res.send(result)
+        })
     }
     finally {
 
